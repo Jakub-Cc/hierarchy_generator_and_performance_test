@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" name="Gen">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY" />
+			<PatternLayout>
+				<Pattern>%-5level %logger{1} - %msg%throwable%n</Pattern>
+			</PatternLayout>
+		</Console>
+		<File name="MyFile" fileName="log/log.out" immediateFlush="true">
+        <PatternLayout>
+				<Pattern>%-5level %logger{1} - %msg%throwable%n</Pattern>
+			</PatternLayout>
+    	</File>
+    	<File name="MyFile3" fileName="log/traceHK.out" immediateFlush="true">
+        <PatternLayout>
+				<Pattern>%msg%throwable%n</Pattern>
+			</PatternLayout>
+    	</File>    
+	</Appenders>
+	<Loggers>
+		 <Logger name="HkRunner" level="info" additivity="false">
+	        <appender-ref ref="MyFile3"/>
+	    </Logger>
+		<Root level="TRACE" additivity="false">
+			<AppenderRef ref="Console"/>
+			 <appender-ref ref="MyFile" level="error"/>
+		</Root>
+	</Loggers>
+</Configuration>
