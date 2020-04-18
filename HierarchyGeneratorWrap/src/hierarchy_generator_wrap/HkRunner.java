@@ -1,3 +1,5 @@
+package hierarchy_generator_wrap;
+
 import java.io.File;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -14,14 +16,15 @@ public class HkRunner {
 	private static final Logger log = LogManager.getLogger(HkRunner.class);
 
 	public static void main(String[] args) {
-		int repats = 20;
+		int repats = 30;
 		String folderPath = "out";
 
-		disableStreams();
+		// disableStreams();
 
 		for (String filePath : getFiles(folderPath)) {
 			for (int i = 0; i < repats; i++) {
 				try {
+					System.out.println(filePath);
 					long runTime = runHk(createArgs(filePath));
 					log.info("{} - {}", filePath, runTime);
 				} catch (Exception e) {
@@ -53,11 +56,8 @@ public class HkRunner {
 	}
 
 	private static List<String> getFiles(String folderPath) {
-		File file = Paths.get("out").toFile();
+		File file = Paths.get(folderPath).toFile();
 		Collection<File> c = FileUtils.listFiles(file, null, true);
-
-		System.out.println(c.size());
-
 		return c.stream().map(File::getPath).collect(Collectors.toList());
 	}
 
@@ -71,6 +71,6 @@ public class HkRunner {
 	private static String[] createArgs(String filePath) {
 
 		return new String[] { "-lgmm", "-cf", "1.0", "-rf", "1.0", "-e", "1", "-l", "1", "-k", "2", "-n", "10", "-r",
-				"10", "-s", "2", "-w", "2147483600", "-c", "-i", filePath, "-o", "/hk" };
+				"10", "-s", "2", "-w", "2147483600", "-c", "-i", filePath, "-o", "hk" };
 	}
 }

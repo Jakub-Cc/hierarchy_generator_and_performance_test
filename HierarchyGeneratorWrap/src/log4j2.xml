@@ -19,7 +19,7 @@
     	</File>    
 	</Appenders>
 	<Loggers>
-		 <Logger name="HkRunner" level="info" additivity="false">
+		 <Logger name="hierarchy_generator_wrap.HkRunner" level="info" additivity="false">
 	        <appender-ref ref="MyFile3"/>
 	    </Logger>
 		<Root level="TRACE" additivity="false">
